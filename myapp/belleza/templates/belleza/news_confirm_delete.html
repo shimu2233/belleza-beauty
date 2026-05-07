@@ -1,0 +1,22 @@
+{% extends './base.html' %} 
+{% block content %}
+<div class="container mt-5">
+    <div class="card border-danger mb-3 max-width-600 mx-auto">
+        <div class="card-header bg-danger text-white">
+            <strong>削除の確認</strong>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">以下のニュースを削除しようとしています。</h5>
+            <p class="card-text text-muted">「{{ news_item.title }}」</p>
+            
+            <p class="text-danger">一度削除すると元に戻すことはできません。本当に削除しますか？</p>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">削除</button>
+                <a href="{% url 'belleza:news' %}" class="btn btn-secondary">キャンセル</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
