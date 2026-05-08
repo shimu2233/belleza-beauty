@@ -25,11 +25,7 @@ SECRET_KEY = 'igm=a%%uz4chhow!vj+kgm^_xl^qho)ltxu8!6fjo7)vf!311e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = [
-    'https://belleza-beauty-2.onrender.com',
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
