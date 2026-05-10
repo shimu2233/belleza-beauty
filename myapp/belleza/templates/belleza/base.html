@@ -38,37 +38,44 @@
             width: 200px;
             height: auto;
         }
-</style>
-</style>
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px); /* 少し深めから浮かせるのが美容系っぽいです */
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        .fade-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         </style>
     </head>
     <body>
         <!-- ナビゲーションバー -->    
         <nav class="navbar navbar-expand-lg navbar-gold bg-dark fixed-top">
-        <a class="navbar-brand" class="gold-text" href="{% url 'belleza:index' %}">Belleza</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{% url 'belleza:index' %}">Belleza</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
             
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:commitment' %}">こだわり</a>
+                    <a class="nav-link" href="{% url 'belleza:commitment' %}">こだわり</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:price' %}">価格・支払い</a>
+                    <a class="nav-link" href="{% url 'belleza:price' %}">価格・支払い</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:questionnaireandbook' %}">ご予約・お問合せ</a>
+                    <a class="nav-link" href="{% url 'belleza:questionnaireandbook' %}">ご予約・お問合せ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:access' %}">アクセス</a>
+                    <a class="nav-link" href="{% url 'belleza:access' %}">アクセス</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:news' %}">ビフォーアフター</a>
+                    <a class="nav-link" href="{% url 'belleza:news' %}">ビフォーアフター</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" class="gold-text" href="{% url 'belleza:point' %}">プライバシーポリシー</a>
+                    <a class="nav-link" href="{% url 'belleza:point' %}">プライバシーポリシー</a>
                 </li>
                 
             </ul>
@@ -78,5 +85,19 @@
             {% block content %}
             {% endblock %}
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+            });
+        </script>
     </body>
 </html>
