@@ -1,28 +1,28 @@
 {% extends './base.html' %}
 {% block content %}
-<h1>ビフォーアフター</h1>
+<h1 class="fade-up">ビフォーアフター</h1>
 
 {% if user.is_authenticated %}
     <a href="{% url 'belleza:news_create' %}" class="btn btn-primary mb-3">新規投稿</a>
 {% endif %}
 
 {% for item in news_list %}
-    <h2 style="text-align: center;">{{ item.title }}</h2>
+    <h2 style="text-align: center;" class="fade-up">{{ item.title }}</h2>
     <div class="row align-items-center">
         <div class="col-auto">
             <img src="{{ item.image1 }}">
             {% if item.image1 %}
-                <img src="{{ item.image1.url }}" alt="ビフォーアフター画像" style="width: 500px;">
+                <img src="{{ item.image1.url }}" alt="ビフォーアフター画像" style="width: 500px;" class="fade-up">
             {% endif %}
         </div>
         <div class="col-auto">
             <img src="{{ item.image2 }}">
             {% if item.image2 %}
-                <img src="{{ item.image2.url }}" alt="ビフォーアフター画像" style="width: 500px;">
+                <img src="{{ item.image2.url }}" alt="ビフォーアフター画像" style="width: 500px;" class="fade-up">
             {% endif %}
         </div>
     </div>
-    <p style="text-align: center;">{{ item.content }}</p>
+    <p style="text-align: center;" class="fade-up">{{ item.content }}</p>
     {% if user.is_authenticated %}
         <div class="mt-2">
             <a href="{% url 'belleza:news_edit' item.pk %}" class="btn btn-sm btn-outline-secondary">編集</a>
