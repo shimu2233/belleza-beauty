@@ -53,12 +53,18 @@ venv\Scripts\activate        # Windowsの場合
 pip install -r requirements.txt
 ```
 
-以下の環境変数を設定してください（`.env` は `.gitignore` 済み）。
+`myapp/.env.example` をコピーして `myapp/.env` を作成し、値を埋めてください（`.env` は `.gitignore` 済みでGitには含まれません）。
+
+```bash
+cp .env.example .env
+```
 
 | 変数名 | 用途 |
 |---|---|
-| `DATABASE_URL` | DB接続文字列（例: `sqlite:///db.sqlite3` でローカルはSQLiteでも可） |
-| `CLOUD_NAME` / `API_KEY` / `API_SECRET` | Cloudinaryの認証情報（画像アップロード先） |
+| `SECRET_KEY` | Djangoのセッション署名などに使う秘密鍵。`.env.example`内のコマンドで生成できます |
+| `DEBUG` | ローカルは `True`、本番相当の動作を確認したい時は `False` |
+| `DATABASE_URL` | DB接続文字列（ローカルは `sqlite:///db.sqlite3` で十分） |
+| `CLOUD_NAME` / `API_KEY` / `API_SECRET` | Cloudinaryの認証情報（画像アップロード先。cloudinary.comのダッシュボードで確認） |
 
 ```bash
 python manage.py migrate
@@ -66,7 +72,7 @@ python manage.py createsuperuser   # News投稿用の管理者アカウント作
 python manage.py runserver
 ```
 
-`settings.py` は `DEBUG = False` 固定になっているため、ローカルで静的ファイルの挙動を本番同様に確認したい場合は `python manage.py collectstatic` を一度実行してください。
+`DEBUG` を `.env` で `False` にした場合、静的ファイルの挙動を本番同様に確認するには `python manage.py collectstatic` を一度実行してください。
 
 ## デザインの方向性
 
