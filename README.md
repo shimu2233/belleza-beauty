@@ -19,9 +19,9 @@
 
 ```
 belleza-beauty/
-└── myapp/                      # Djangoプロジェクト本体（実際の作業はここが起点）
+├── requirements.txt            # 依存関係一覧（Renderのビルドはここを読む）
+└── myapp/                      # Djangoプロジェクト本体（manage.pyの実行はここが起点）
     ├── manage.py
-    ├── requirements.txt        # 実際にデプロイで使われる依存関係一覧
     ├── myapp/                  # プロジェクト設定（settings.py, urls.py）
     └── belleza/                # メインアプリ
         ├── models.py           # Category, Shop, News
@@ -47,10 +47,10 @@ belleza-beauty/
 ## ローカルでの動かし方
 
 ```bash
-cd myapp
 python -m venv venv
 venv\Scripts\activate        # Windowsの場合
 pip install -r requirements.txt
+cd myapp
 ```
 
 `myapp/.env.example` をコピーして `myapp/.env` を作成し、値を埋めてください（`.env` は `.gitignore` 済みでGitには含まれません）。
