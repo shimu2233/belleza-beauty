@@ -8,7 +8,7 @@
 
 | 項目 | 使用技術 |
 | バックエンド | Django 6.0.4 |
-| DB | MySQL（`dj_database_url` 経由で `DATABASE_URL` から接続設定を読み込み） |
+| DB | PostgreSQL（`dj_database_url` 経由で `DATABASE_URL` から接続設定を読み込み） |
 | 画像ストレージ | Cloudinary（`django-cloudinary-storage`） |
 | 静的ファイル配信 | WhiteNoise |
 | 本番サーバー | gunicorn |
@@ -73,6 +73,15 @@ python manage.py runserver
 ```
 
 `DEBUG` を `.env` で `False` にした場合、静的ファイルの挙動を本番同様に確認するには `python manage.py collectstatic` を一度実行してください。
+
+## デプロイ設定（Render）
+
+Root Directory: 空欄（リポジトリ直下が起点）
+
+- Build Command: `pip install -r requirements.txt && python myapp/manage.py collectstatic --noinput && python myapp/manage.py migrate`
+- Start Command: `python -m gunicorn --chdir myapp myapp.wsgi:application`
+
+依存パッケージを追加/変更する際は、必ずこの直下の `requirements.txt` を編集してください（Build CommandがこれをGitHub上のコードと同期している唯一の場所です。以前はBuild Commandに直接パッケージ名を書く形になっており、`requirements.txt`を編集しても本番に反映されない状態だったため、`-r requirements.txt`を読む形に統一しました）。
 
 ## デザインの方向性
 
