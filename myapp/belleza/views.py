@@ -3,6 +3,7 @@ from .models import Category, Shop
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import News
 from .forms import NewsForm
 from django.shortcuts import render, get_object_or_404, redirect
@@ -13,15 +14,15 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Shop
 
-class CreateView(generic.edit.CreateView):
+class CreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = Shop
     fields = '__all__'
 
-class UpdateView(generic.edit.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Shop
     fields = '__all__'
 
-class DeleteView(generic.edit.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Shop
     success_url = reverse_lazy('belleza:index')
 

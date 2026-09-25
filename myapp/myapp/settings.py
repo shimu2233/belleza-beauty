@@ -77,6 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
 LOGIN_REDIRECT_URL = '/belleza/news'
+LOGIN_URL = '/accounts/login/'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
