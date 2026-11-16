@@ -1,30 +1,12 @@
 from django.views import generic
-from .models import Category, Shop
-from django.urls import reverse_lazy
-from django.shortcuts import render
+from .models import Shop
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import News
 from .forms import NewsForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 class IndexView(generic.ListView):
     model = Shop
-
-class DetailView(generic.DetailView):
-    model = Shop
-
-class CreateView(LoginRequiredMixin, generic.edit.CreateView):
-    model = Shop
-    fields = '__all__'
-
-class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
-    model = Shop
-    fields = '__all__'
-
-class DeleteView(LoginRequiredMixin, generic.edit.DeleteView):
-    model = Shop
-    success_url = reverse_lazy('belleza:index')
 
 def point(request):
     return render(request, 'belleza/point.html',)
@@ -38,19 +20,12 @@ def price(request):
 def questionnaireandbook(request):
     return render(request, 'belleza/questionnaireandbook.html',)
 
-def staff(request):
-    return render(request, 'belleza/staff.html',)
-
 def news(request):
     news_data = News.objects.all().order_by('-id')
     return render(request, 'belleza/news.html', {'news_list': news_data})
 
 def access(request):
     return render(request, 'belleza/access.html',)
-
-def news_list(request):
-    news_items = News.objects.all().order_by('-id')
-    return render(request, 'belleza/news_list.html', {'news_list': news_items})
 
 @login_required
 def news_create(request):
